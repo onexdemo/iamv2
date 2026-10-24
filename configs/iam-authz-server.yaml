@@ -1,0 +1,50 @@
+# iam-authz-server configuration.
+
+insecure:
+  addr: 0.0.0.0:8081
+  timeout: 30s
+
+secure:
+  addr: ""
+  timeout: 30s
+
+otel:
+  endpoint: 127.0.0.1:4327
+  service-name: iam-authz-server
+  output-mode: classic
+  level: debug
+  add-source: true
+  slog:
+    format: json
+    time-format: "2006-01-02 15:04:05"
+    output: stdout
+
+redis:
+  addr: 127.0.0.1:6379
+  username: ""
+  password: ""
+  database: 0
+  max-retries: 3
+  min-idle-conns: 0
+  dial-timeout: 5s
+  read-timeout: 3s
+  write-timeout: 3s
+  pool-time: 4s
+  pool-size: 10
+  enable-trace: false
+
+# Snapshot source. The account must be an administrator because the cache
+# endpoints expose secret keys and policies.
+apiserver-addr: "http://127.0.0.1:8080"
+apiserver-username: admin
+apiserver-password: "Admin@2020"
+apiserver-timeout: 10s
+cache-reload-interval: 1m
+
+analytics:
+  enable: true
+  pool-size: 50
+  records-buffer-size: 2000
+  flush-interval: 200
+  enable-detailed-recording: true
+  storage-expiration-time: 24h

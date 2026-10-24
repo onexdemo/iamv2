@@ -1,0 +1,21 @@
+watch:
+  metrics-addr: 0.0.0.0:7072
+  healthz-addr: 0.0.0.0:8883
+  per-watch-concurrency: 10
+  lock-name: iam-watcher
+
+coredb:
+  addr: 127.0.0.1:3306
+  username: iam
+  password: "iam(#)666"
+  database: iam
+  max-connection-life-time: 10s
+  max-idle-connections: 100
+  max-open-connections: 100
+  log-level: 4
+
+watcher:
+  clean:
+    max-reserve-days: 180
+  task:
+    max-inactive-days: 0

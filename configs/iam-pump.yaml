@@ -1,0 +1,31 @@
+watch:
+  metrics-addr: 0.0.0.0:7071
+  healthz-addr: 0.0.0.0:8882
+  per-watch-concurrency: 10
+  lock-name: iam-pump
+
+redis:
+  addr: 127.0.0.1:6379
+  username: ""
+  password: ""
+  database: 0
+  max-retries: 3
+  min-idle-conns: 0
+  dial-timeout: 5s
+  read-timeout: 3s
+  write-timeout: 3s
+  pool-time: 4s
+  pool-size: 100
+  enable-trace: false
+
+pump:
+  purge-delay: 10
+  omit-detailed-recording: false
+  pumps:
+    mongo:
+      type: mongo
+      meta:
+        mongo_url: mongodb://127.0.0.1:27017
+        collection_name: iam_analytics
+        collection_cap_enable: true
+        collection_cap_max_size_bytes: 1048576

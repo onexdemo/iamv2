@@ -1,0 +1,62 @@
+# iam-apiserver configuration.
+# Command-line flags take precedence over the values in this file.
+
+# HTTP listener.
+insecure:
+  addr: 0.0.0.0:8080
+  timeout: 30s
+
+# HTTPS listener. Leave the secure addr empty to disable TLS.
+secure:
+  addr: ""
+  timeout: 30s
+
+otel:
+  endpoint: 127.0.0.1:4327
+  service-name: iam-apiserver
+  output-mode: classic
+  level: debug
+  add-source: true
+  slog:
+    format: json
+    time-format: "2006-01-02 15:04:05"
+    output: stdout
+
+# MySQL storage for users, secrets and policies.
+coredb:
+  addr: 127.0.0.1:3306
+  username: iam
+  password: "iam(#)666"
+  database: iam
+  max-connection-life-time: 10s
+  max-idle-connections: 100
+  max-open-connections: 100
+  log-level: 4
+
+# Redis is used to publish cache-invalidation notifications to the authz
+# servers. Leave the address empty to disable notifications.
+redis:
+  addr: 127.0.0.1:6379
+  username: ""
+  password: ""
+  database: 0
+  max-retries: 3
+  min-idle-conns: 0
+  dial-timeout: 5s
+  read-timeout: 3s
+  write-timeout: 3s
+  pool-time: 4s
+  pool-size: 10
+  enable-trace: false
+
+# JWT signing configuration.
+jwt:
+  key: dfVpOK8LZeJLZHYmHdb1VdyRrACKpqoo
+  expired: 24h
+  max-refresh: 24h
+  signing-method: HS256
+
+# Bootstrap administrator. Created on first start when no administrator exists.
+admin-username: admin
+admin-password: "Admin@2020"
+admin-email: admin@foxmail.com

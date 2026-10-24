@@ -1,0 +1,35 @@
+metadata:
+  modulePath: github.com/onexdemo/iamv2
+  shortDescription: iam platform
+  longMessage: iam platform services
+  image:
+    registryPrefix: docker.io/onexdemo
+    dockerfileMode: combined
+    distrolessMode: never
+  deploymentMethod: docker
+  makefileMode: unstructured
+  author: 孔令飞
+  email: colin404@foxmail.com
+
+webServers:
+  - binaryName: iam-apiserver
+    webFramework: gin
+    storageType: mysql
+    sdkType: rest
+    withOTel: true
+  - binaryName: iam-authz-server
+    webFramework: gin
+    storageType: redis
+    sdkType: rest
+    withOTel: true
+
+jobServers:
+  - binaryName: iam-pump
+    storageType: mongo
+    disableCronJob: false
+  - binaryName: iam-watcher
+    storageType: mysql
+    disableCronJob: false
+
+cliTools:
+  - binaryName: iamctl
